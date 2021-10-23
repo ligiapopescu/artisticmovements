@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
+
+.section {
+    padding: 5rem 3.5rem;
+    position: relative;
+    overflow: hidden;
+    text-align: left;
+    font-family: Roboto;
+    font-style: normal;
+
+}
+
+.section__title {
+    padding: 1rem 0 2rem 7rem;
+    color: #F4F4F4;
+    display: block;
+    font-weight: 500;
+    font-size: 3rem;
+}
+
+.section__description {
+    padding: 0.5rem 0 2rem 7rem;
+    display: block;
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: #7F6A57;
+    width: 50%;
+}
+
+.section__content {
+    display: block;
+    overflow: hidden;
+}

@@ -1,0 +1,25 @@
+.upload div {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.upload__image {
+    width: 70%;
+    height: 100%;
+    cursor: pointer;
+    background: url(upload-icon.png);
+    background-size: 100% 100%;
+    margin: auto;
+    display: block;
+}
+
+.uploaded__image {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#imageUpload {
+    display: none;
+}
+
