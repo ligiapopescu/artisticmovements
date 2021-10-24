@@ -8,10 +8,12 @@ class UploadArtwork extends Component {
         super(props);
         this.state = {
             uploaded: false,
-            file: null
+            file: null,
+            label: null
         };
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     handleChange(change) {
@@ -29,9 +31,9 @@ class UploadArtwork extends Component {
         })
             .then((response) => {
                 console.log('response success', response);
-                const predictions = response.data.map(prediction => 
-                    prediction.className + " - " + 
-                    Number(prediction.classPercent ).toFixed(2) + "%")
+                const predictions = response.data.map(prediction =>
+                    prediction.className + " - " +
+                    Number(prediction.classPercent).toFixed(2) + "%")
                 this.setState({
                     label: predictions.join(" \n")
                 });
@@ -43,6 +45,13 @@ class UploadArtwork extends Component {
 
         this.setState({
             file: URL.createObjectURL(loadedFile),
+        });
+    }
+
+    handleClick() {
+        this.setState({
+            file: null,
+            label: null
         });
     }
 
@@ -61,12 +70,13 @@ class UploadArtwork extends Component {
                             onChange={this.handleChange} />
                     </div>) :
                     (
-                        <ImageWithLabel
-                            className="uploaded_image"
-                            image={this.state.file}
-                            label={this.state.label}
-                        >
-                        </ImageWithLabel>
+                        <div className="upload__loaded-image">
+                            <div className="upload__clear-image" onClick={this.handleClick}></div>
+                            <ImageWithLabel
+                                image={this.state.file}
+                                label={this.state.label}
+                            />
+                        </div>
                     )}
             </div>
         );

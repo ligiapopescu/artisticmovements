@@ -1,15 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap');
 
 .image-with-label {
     position: relative;
     text-align: center;
     margin: auto;
     width: fit-content;
+    height: 100%;
 } 
 
 .image-with-label img {
     max-width: 100%;
-    max-height: 100%;
+    height: 100%;
 }
 
 .image-label {
@@ -28,4 +29,5 @@
 
 .image-label pre {
     font-family: 'PT Serif', serif;
+    text-transform: lowercase;
 }
