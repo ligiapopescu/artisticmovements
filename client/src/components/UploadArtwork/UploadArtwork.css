@@ -1,4 +1,4 @@
-.upload div {
+.upload__image-container {
     width: 100%;
     height: 100%;
     text-align: center;
@@ -14,12 +14,11 @@
     display: block;
 }
 
-.uploaded__image {
-    max-width: 100%;
-    max-height: 100%;
-}
-
 #imageUpload {
     display: none;
 }
 
+.image-with-label {
+    max-width: 100%;
+    max-height: 100%;
+}
