@@ -1,0 +1,34 @@
+.upload-section__content {
+  display: flex;
+}
+
+.upload-section__info {
+  width: 500px;
+  margin-right: 100px;
+}
+
+.upload-section__unsplash {
+  margin-left: auto;
+  width: 625px;
+  height: 568px;
+}
+
+.upload-section__title {
+  padding-bottom: 0.6em;
+}
+
+.section__description {
+  padding-bottom: 1em;
+}
+
+.unsplash-react input {
+  color: white;
+}
+
+.unsplash-react > span {
+  display: none !important;
+}
+
+.unsplash-react > div:last-child > div:first-child {
+  overflow: hidden !important;
+}

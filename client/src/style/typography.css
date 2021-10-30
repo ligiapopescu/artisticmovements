@@ -1,0 +1,13 @@
+.text-h2 {
+  font-weight: 500;
+  font-size: 3rem;
+}
+
+.text-copy {
+  font-weight: 400;
+  font-size: 1.5rem;
+}
+
+.text-clr-primary {
+    color: #7f6a57;
+}
