@@ -1,8 +1,8 @@
 import "./UploadSection.css";
-import TileScrollOneLine from "components/TileScrolls/TileScrollOneLine";
+import TileScroll from "components/TileScrolls/TileScroll";
 import UnsplashReact, { BlobUploader, withDefaultProps } from "unsplash-react";
 
-export default ({ images }) => {
+export default () => {
   return (
     <section className="upload-section" data-scroll-section>
       <div className="upload-section__content content-container">
@@ -27,7 +27,7 @@ export default ({ images }) => {
         </div>
       </div>
       <div className="">
-        <TileScrollOneLine images={images} />
+        <TileScroll tileScrollType="oneline"/>
       </div>
     </section>
   );

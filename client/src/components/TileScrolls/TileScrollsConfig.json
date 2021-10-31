@@ -1,0 +1,163 @@
+[
+  {
+    "tileScroll": "rotated",
+    "componentId": "tileScrollRotated",
+    "rowsNumber": 5,
+    "imagesOnRow": 6,
+    "scrollSpeed": 4,
+    "images": [
+      {
+        "type": "img",
+        "src": "artworks/william-turner_kidwelly-castle.jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/william-turner_kidwelly-castle.jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/william-turner_kidwelly-castle.jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/william-turner_kidwelly-castle.jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/william-turner_kidwelly-castle.jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/william-turner_kidwelly-castle.jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/gerardo-dottori_gli-amanti-1907.jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/fairfield-porter_october-interior-1963.jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/henri-edmond-cross_ranelagh.jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/ilya-mashkov_tangerines-and-glass.jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/jean-dubuffet_portrait-de-georges-limbour.jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/nicholas-roerich_anxiety-1938.jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/paul-signac_la-voile-verte-1904.jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/pablo-picasso_the-chess-1911.jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/wu-guanzhong_lotus-under-the-sun-2001.jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/vittore-carpaccio_the-annunciation-1504.jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/georges-braque_the-estaque-1906.jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/giovanni-bellini_pesaro-altarpiece-predella-1474.jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/charles-lapicque_man-uvres-de-nuit-1958.jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/william-turner_giudecca-la-donna-della-salute-and-san-georgio.jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/william-turner_kidwelly-castle.jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/richard-whitney_gathering-flowers.jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/john-miller_farm-in-tuscany.jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/william-adolphe-bouguereau_head-study-of-female-face-blonde-1898.jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/tom-thomson_northern-lights-1917.jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/robert-julian-onderdonk_panoramic-landscape.jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/thomas-gainsborough_seashore-with-fishermen-1781(1).jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/thomas-gainsborough_seashore-with-fishermen-1781(1).jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/thomas-gainsborough_seashore-with-fishermen-1781(1).jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/thomas-gainsborough_seashore-with-fishermen-1781(1).jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/thomas-gainsborough_seashore-with-fishermen-1781(1).jpg"
+      }
+    ]
+  },
+  {
+    "tileScroll": "oneline",
+    "componentId": "tileScrollOneLine",
+    "rowsNumber": 1,
+    "imagesOnRow": 5,
+    "scrollSpeed": 2,
+    "images": [
+      {
+        "type": "img",
+        "src": "artworks/william-turner_kidwelly-castle.jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/richard-whitney_gathering-flowers.jpg"
+      },
+      {
+        "type": "upload"
+      },
+      {
+        "type": "img",
+        "src": "artworks/robert-julian-onderdonk_panoramic-landscape.jpg"
+      },
+      {
+        "type": "img",
+        "src": "artworks/thomas-gainsborough_seashore-with-fishermen-1781(1).jpg"
+      }
+    ]
+  }
+]

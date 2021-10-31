@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import axios from "axios";
 import Section from "components/UI/Section";
-import TileScrollRotated from "components/TileScrolls/TileScrollRotated";
+import TileScroll from "components/TileScrolls/TileScroll";
 import UploadSection from "components/UploadSection/UploadSection";
 
 class LandingPage extends Component {
@@ -34,9 +34,9 @@ class LandingPage extends Component {
           title="Artistic Movements"
           description="Using Deep Convolutional Neural Networks for Artistic Movements Recognition"
         >
-          <TileScrollRotated images={this.state.images} />
+          <TileScroll tileScrollType="rotated" />
         </Section>
-        <UploadSection images={this.state.images} />
+        <UploadSection/>
         <Section
           title="Available currents"
           description="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
