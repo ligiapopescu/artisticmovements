@@ -12,11 +12,11 @@ class UploadArtwork extends Component {
             label: null
         };
 
-        this.handleChange = this.handleChange.bind(this);
+        this.handleUpload = this.handleUpload.bind(this);
         this.handleClick = this.handleClick.bind(this);
     }
 
-    handleChange(change) {
+    handleUpload(change) {
         const loadedFile = change.target.files[0];//
 
         let formData = new FormData();
@@ -67,7 +67,7 @@ class UploadArtwork extends Component {
                             type="file"
                             name="user[image]"
                             multiple={false}
-                            onChange={this.handleChange} />
+                            onChange={this.handleUpload} />
                     </div>) :
                     (
                         <div className="upload__loaded-image">

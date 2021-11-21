@@ -36,7 +36,7 @@ class LandingPage extends Component {
         >
           <TileScroll tileScrollType="rotated" />
         </Section>
-        <UploadSection/>
+        <UploadSection />
         <Section
           title="Available currents"
           description="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
