@@ -5,6 +5,7 @@ import torch.utils.data as data
 from torch.utils.data import Dataset, DataLoader
 import torch.optim as optim
 from torchvision.transforms.functional import to_tensor
+import torchvision.models as models
 
 import numpy as np
 import csv
@@ -18,8 +19,11 @@ sys.path.insert(0, './neuralnetwork')
 
 absolute_path = os.path.dirname(os.path.abspath(__file__))
 
-csv_source_path = absolute_path + '/traindata/wikiart_csv/'
-img_source_path = absolute_path + '/traindata/wikiart/'
+#csv_source_path = absolute_path + '/traindata/wikiart_csv/'
+#img_source_path = absolute_path + '/traindata/wikiart/'
+csv_source_path = 'C:/Projects/wikiart_csv/'
+img_source_path = 'C:/Projects/wikiart/'
+
 
 def get_list_from_file(file_path):
 
@@ -43,7 +47,7 @@ def get_list_from_file(file_path):
 
 
 def get_file_lists():
-    csv_path = csv_source_path + 'style_train_selected.csv'
+    csv_path = csv_source_path + 'style_train.csv'
     file_list = get_list_from_file(csv_path)
 
     train_test_proportion = .85
@@ -61,8 +65,11 @@ def train_fn(epochs: int, train_loader: data.DataLoader, test_loader: data.DataL
 
   # Iteram prin numarul de epoci
     for e in range(epochs):
+        print('Epoca {}/{}'.format(e, epochs - 1))
+        print('-' * 10)
         # Iteram prin fiecare exemplu din dataset
-        for images, labels in train_loader:
+        net = net.train()
+        for idx, (images, labels) in enumerate(train_loader):
             # Aplicam reteaua neurala pe imaginile de intrare
             out = net(images)
             # Aplicam functia cost pe iesirea retelei neurale si pe adnotarile imaginilor
@@ -80,55 +87,24 @@ def train_fn(epochs: int, train_loader: data.DataLoader, test_loader: data.DataL
         count = 0
         correct = 0
 
+        net = net.eval()
+
+
         for test_images, test_labels in test_loader:
-            predicted_labels = torch.argmax(net(test_images), dim=1)
-            count += len(predicted_labels)
-            for index, pred_label in enumerate(predicted_labels):
-                if pred_label == test_labels[index]:
+            predicted_labels = net(test_images)
+            predicted_labels = np.array(predicted_labels.detach().numpy())
+
+            count += len(test_images)
+            for index in range(len(test_images)):
+                sortedIndexes = np.argsort(predicted_labels[index])[::-1]
+                if test_labels[index].numpy() in sortedIndexes[:3]:
                     correct += 1
 
         print("Acuratetea la finalul epocii {} este {:.2f}".format(
             e, (correct / count)*100))
-    torch.save(net, "server/neuralnetwork/torch_model")
+
+    torch.save(net, "server/neuralnetwork/torch_model_3")
     return net
-
-
-class LeNet(nn.Module):
-    def __init__(self, activation):
-        super(LeNet, self).__init__()
-
-        self.conv1 = nn.Conv2d(
-            in_channels=3, out_channels=6, kernel_size=5, stride=1)
-        self.conv2 = nn.Conv2d(
-            in_channels=6, out_channels=16, kernel_size=5, stride=1)
-        self.conv3 = nn.Conv2d(
-            in_channels=16, out_channels=120, kernel_size=5, stride=1)
-        self.pool = nn.AvgPool2d(kernel_size=2, stride=2)
-        self.fc1 = nn.Linear(in_features=120, out_features=84)
-        # out_features = num_classes
-        self.fc2 = nn.Linear(in_features=84, out_features=27)
-        self.activation = activation
-        self.softmax = nn.Softmax(1)
-        self.batch_norm1 = nn.BatchNorm2d(6)
-        self.batch_norm2 = nn.BatchNorm2d(16)
-
-    def forward(self, x):
-        x = self.conv1(x)
-        x = self.activation(x)
-        x = self.pool(x)
-        x = self.batch_norm1(x)
-        x = self.conv2(x)
-        x = self.activation(x)
-        x = self.pool(x)
-        x = self.batch_norm2(x)
-        x = self.conv3(x)
-        x = self.activation(x)
-        x = torch.flatten(x, 1)
-        x = self.fc1(x)
-        x = self.activation(x)
-        x = self.fc2(x)
-        x = self.softmax(x)
-        return x
 
 
 class StyleRecognitionDataset(Dataset):
@@ -149,28 +125,32 @@ class StyleRecognitionDataset(Dataset):
         img = np.array(img)
         return to_tensor(img), img_label
 
+
 def get_data_loaders():
     train_samples, test_samples = get_file_lists()
     style_recognition_train = StyleRecognitionDataset(train_samples, 32, 32)
     style_recognition_test = StyleRecognitionDataset(test_samples, 32, 32)
 
     train_loader = DataLoader(style_recognition_train,
-                              batch_size=16, shuffle=True)
+                              batch_size=16, shuffle=True, drop_last=True)
     test_loader = DataLoader(style_recognition_test,
-                             batch_size=16, shuffle=False)
+                             batch_size=16, shuffle=False, drop_last=True)
     return train_loader, test_loader
 
 
-def train_model():
+def train_model(epochs):
     train_loader, test_loader = get_data_loaders()
-    epochs = 1
     activation = nn.Tanh()
-    lenet = LeNet(activation)
-    optimizer = optim.SGD(lenet.parameters(), lr=1e-2)
+
+    net = models.resnet18(pretrained=True)
+    num_ftrs = net.fc.in_features
+    net.fc = nn.Linear(num_ftrs, 27)
+
+    optimizer = optim.SGD(net.parameters(), lr=1e-2)
     optimizer.zero_grad()
     loss_fn = nn.CrossEntropyLoss()
     network = train_fn(epochs, train_loader, test_loader,
-                       lenet, loss_fn, optimizer)
+                       net, loss_fn, optimizer)
 
 
 def get_top_n_predictions(tensorImage, n):
@@ -182,13 +162,13 @@ def get_top_n_predictions(tensorImage, n):
 
     for classNumber in sortedIndexes[:n]:
         classData = {}
-        classData['classPercent'] = prediction[classNumber]*100
+        classData['classPercent'] = prediction[classNumber]
         className = artisticMovementDictionary[classNumber]
         className = className.replace("_", " ")
         classData['className'] = className
 
         topPredictions.append(classData)
-    
+
     return topPredictions
 
 
@@ -196,7 +176,7 @@ def get_predictions(tensorImage):
     processed_images = []
     processed_images.append(tensorImage)
     model_input = torch.unsqueeze(tensorImage, 0)
-    model = torch.load('neuralnetwork/torch_model')
+    model = torch.load('neuralnetwork/torch_model_2')
     prediction = model(model_input)
     return prediction
 

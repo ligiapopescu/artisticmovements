@@ -3,7 +3,12 @@ import axios from "axios";
 
 import "./UploadSection.css";
 import TileScroll from "components/TileScrolls/TileScroll";
-import UnsplashReact, { BlobUploader, withDefaultProps } from "unsplash-react";
+import UnsplashReact, {
+  BlobUploader,
+  Base64Uploader,
+  withDefaultProps,
+} from "unsplash-react";
+import ImageWithLabel from "../UI/ImageWithLabel";
 
 class UploadSection extends Component {
   constructor(props) {
@@ -16,12 +21,10 @@ class UploadSection extends Component {
     this.handleUpload = this.handleUpload.bind(this);
   }
 
-  handleUpload(change) {
-    const loadedFile = change.target.files[0]; //
-
+  handleUpload(upload) {
     let formData = new FormData();
     formData.append("title", "Uploaded by user");
-    formData.append("artwork_image", loadedFile);
+    formData.append("artwork_image", upload, "image.jpg");
     formData.append("uploaded_by_user", true);
 
     axios
@@ -31,13 +34,9 @@ class UploadSection extends Component {
         },
       })
       .then((response) => {
-        console.log("response success", response);
         const predictions = response.data.map(
           (prediction) =>
-            prediction.className +
-            " - " +
-            Number(prediction.classPercent).toFixed(2) +
-            "%"
+            prediction.className
         );
         this.setState({
           label: predictions.join(" \n"),
@@ -48,7 +47,7 @@ class UploadSection extends Component {
       });
 
     this.setState({
-      file: URL.createObjectURL(loadedFile),
+      file: URL.createObjectURL(upload),
     });
   }
 
@@ -61,6 +60,13 @@ class UploadSection extends Component {
             <div className="upload-section__description text-copy text-clr-primary">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit
             </div>
+            {this.state.file && (
+              <ImageWithLabel
+                className="upload-section__image"
+                image={this.state.file}
+                label={this.state.label}
+              />
+            )}
           </div>
           <div className="upload-section__unsplash">
             <UnsplashReact
@@ -74,7 +80,7 @@ class UploadSection extends Component {
             />
           </div>
         </div>
-        <div className="">
+        <div>
           <TileScroll tileScrollType="oneline" />
         </div>
       </section>

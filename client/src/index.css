@@ -6,14 +6,11 @@ body {
   margin: 0;
   font-family: Roboto;
   font-style: normal;
-  color: #f4f4f4;
-  background: #111111;
+  color: #fff6eb;
+  background: #15181e;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.App {
 }
 
 .content-container {

@@ -1,0 +1,16 @@
+.movements-list {
+  width: 80%;
+  line-height: 3em;
+  overflow-wrap: break-word;
+}
+
+.movements-list__option {
+  display: inline;
+  display: inline;
+  padding: 10px;
+  margin: 1px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+  cursor: pointer;
+  background-color: #57667f;
+}

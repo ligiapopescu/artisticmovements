@@ -17,6 +17,12 @@
   padding-bottom: 0.6em;
 }
 
+.upload-section__image {
+  margin-top: 10px;
+  width: fit-content;
+  height: 395px;
+}
+
 .section__description {
   padding-bottom: 1em;
 }
