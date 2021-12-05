@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import UploadArtwork from "../UploadArtwork/UploadArtwork";
 
 export default (props) => {
@@ -12,7 +12,7 @@ export default (props) => {
   for (let i = 0; i < config.imagesOnRow; i++) {
     let imageIdx = config.imagesOnRow * rowNumber + i;
     let image = config.images[imageIdx];
-    if (image.type == "img") {
+    if (image.type === "img") {
       rowImages.push(
         <img
           key={imageIdx}
