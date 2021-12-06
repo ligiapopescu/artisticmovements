@@ -19,10 +19,8 @@ sys.path.insert(0, './neuralnetwork')
 
 absolute_path = os.path.dirname(os.path.abspath(__file__))
 
-#csv_source_path = absolute_path + '/traindata/wikiart_csv/'
-#img_source_path = absolute_path + '/traindata/wikiart/'
-csv_source_path = 'C:/Projects/wikiart_csv/'
-img_source_path = 'C:/Projects/wikiart/'
+csv_source_path = absolute_path + '/traindata/wikiart_csv/'
+img_source_path = absolute_path + '/traindata/wikiart/'
 
 
 def get_list_from_file(file_path):
@@ -103,7 +101,7 @@ def train_fn(epochs: int, train_loader: data.DataLoader, test_loader: data.DataL
         print("Acuratetea la finalul epocii {} este {:.2f}".format(
             e, (correct / count)*100))
 
-    torch.save(net, "server/neuralnetwork/torch_model_3")
+    torch.save(net, "server/neuralnetwork/torch_model")
     return net
 
 
@@ -176,7 +174,7 @@ def get_predictions(tensorImage):
     processed_images = []
     processed_images.append(tensorImage)
     model_input = torch.unsqueeze(tensorImage, 0)
-    model = torch.load('neuralnetwork/torch_model_2')
+    model = torch.load('neuralnetwork/torch_model')
     prediction = model(model_input)
     return prediction
 
