@@ -1,3 +1,4 @@
-**/traindata
-*.log
-init_data.py
+traindata
+logs
+init_data
+.csv
