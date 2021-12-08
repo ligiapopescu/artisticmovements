@@ -138,6 +138,7 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
     'https://artisticmovements.netlify.app'
 ]
+CORS_ALLOW_ALL_ORIGINS = True #overwrites previous setting
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
