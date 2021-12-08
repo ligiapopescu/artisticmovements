@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get(
 #DEBUG = True
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
-ALLOWED_HOSTS = ['artistic-movements.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['*']  # ['artistic-movements.herokuapp.com', '127.0.0.1']
 
 # Application definition
 
@@ -138,7 +138,7 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
     'https://artisticmovements.netlify.app'
 ]
-CORS_ALLOW_ALL_ORIGINS = True #overwrites previous setting
+CORS_ALLOW_ALL_ORIGINS = True  # overwrites previous setting
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
