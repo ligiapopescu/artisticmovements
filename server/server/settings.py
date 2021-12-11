@@ -25,8 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 #SECRET_KEY = 'django-insecure-44ny67eo7@)z=$s!a4toq=m2o$5iv54tdoa2xnh_4^q_zea9!&'
 SECRET_KEY = os.environ.get(
     'DJANGO_SECRET_KEY', 'cg#p$g+j9tax!#a3cup@1$8obt2_+&k3q+pmu)5%asj6yjpkag')
-# SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
+
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 ALLOWED_HOSTS = ['.localhost', 'artistic-movements.herokuapp.com', '127.0.0.1']
@@ -134,10 +133,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'data')
 MEDIA_URL = '/data/'
 
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',
-    'https://artisticmovements.netlify.app'
-]
+CORS_ALLOW_ALL_ORIGINS = True
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
