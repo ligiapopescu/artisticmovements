@@ -25,7 +25,7 @@ class UploadArtwork extends Component {
     formData.append("uploaded_by_user", true);
 
     axios
-      .post("/api/artworks/", formData, {
+      .post(`${process.env.REACT_APP_BACKEND_API}/api/artworks/`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

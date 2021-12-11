@@ -19,7 +19,7 @@ class AvailableArtMovements extends Component {
 
   refreshImages = () => {
     axios
-      .get("api/artisticmovements/")
+      .get(`${process.env.REACT_APP_BACKEND_API}/api/artisticmovements/`)
       .then((res) => {
         console.log(res);
         return this.setState({ artMovements: res.data });

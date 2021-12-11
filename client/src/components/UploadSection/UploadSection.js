@@ -3,11 +3,7 @@ import axios from "axios";
 
 import "./UploadSection.css";
 import TileScroll from "components/TileScrolls/TileScroll";
-import UnsplashReact, {
-  BlobUploader,
-  Base64Uploader,
-  withDefaultProps,
-} from "unsplash-react";
+import UnsplashReact, { BlobUploader, withDefaultProps } from "unsplash-react";
 import ImageWithLabel from "../UI/ImageWithLabel";
 
 class UploadSection extends Component {
@@ -28,15 +24,14 @@ class UploadSection extends Component {
     formData.append("uploaded_by_user", true);
 
     axios
-      .post("/api/artworks/", formData, {
+      .post(`${process.env.REACT_APP_BACKEND_API}/api/artworks/`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       })
       .then((response) => {
         const predictions = response.data.map(
-          (prediction) =>
-            prediction.className
+          (prediction) => prediction.className
         );
         this.setState({
           label: predictions.join(" \n"),
