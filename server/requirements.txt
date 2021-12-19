@@ -1,8 +1,9 @@
+-f https://download.pytorch.org/whl/torch_stable.html
 dj_database_url==0.5.0
 Django==3.2.5
 numpy==1.20.3
 Pillow==8.4.0
-torch==1.8.1
-torchvision==0.9.1
+torch==1.8.1+cpu 
+torchvision==0.9.1+cpu
 gunicorn==20.1.0
 whitenoise==5.3.0
