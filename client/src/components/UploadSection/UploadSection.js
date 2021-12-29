@@ -51,9 +51,9 @@ class UploadSection extends Component {
       <section className="upload-section" data-scroll-section>
         <div className="upload-section__content content-container">
           <div className="upload-section__info">
-            <div className="upload-section__title text-h2">Upload your own</div>
+            <div className="upload-section__title text-h2">Discover artistic movements</div>
             <div className="upload-section__description text-copy text-clr-primary">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit
+              Choose an Artwork from Unsplash or Upload your own
             </div>
             {this.state.file && (
               <ImageWithLabel

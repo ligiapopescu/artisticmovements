@@ -5,6 +5,19 @@ class ArtMovement(models.Model):
     name = models.CharField(max_length=200, help_text='Enter the art movement', unique=True)
     label = models.IntegerField(unique=True)
 
+    def get_artworks(self):
+        """Create a list of artworks"""
+        number_of_artworks = 10
+        artworks = list(Artwork.objects.filter(art_movement__in=[self.label]).values()[:number_of_artworks])
+        return artworks
+
+    get_artworks.short_description = 'Artworks'
+
+    def number_of_artworks(self):
+        """Count artworks"""
+        artworks = len(Artwork.objects.filter(art_movement__in=[self.label]))
+        return artworks
+
     def __str__(self):
         """String for representing the Model object."""
         return self.name

@@ -2,6 +2,7 @@
   width: 80%;
   line-height: 3em;
   overflow-wrap: break-word;
+  margin-left: 3.1em;
 }
 
 .movements-list__option {
@@ -13,4 +14,14 @@
   white-space: nowrap;
   cursor: pointer;
   background-color: #57667f;
+}
+
+.images-list {
+  margin: 1em 3rem;
+}
+
+.images-list__img {
+  max-width: 200px;
+  max-height: 200px;
+  margin: 10px;
 }

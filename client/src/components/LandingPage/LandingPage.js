@@ -31,15 +31,15 @@ class LandingPage extends Component {
     return (
       <div>
         <Section
-          title="Artistic Movements"
+          title="Artistic Movements and Artworks"
           description="Using Deep Convolutional Neural Networks for Artistic Movements Recognition"
         >
           <TileScroll tileScrollType="rotated" />
         </Section>
         <UploadSection />
         <Section
-          title="Available currents"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+          title="Available artistic movements"
+          description="Explore artworks by artistic movement"
         >
           <AvailableArtMovements />
         </Section>

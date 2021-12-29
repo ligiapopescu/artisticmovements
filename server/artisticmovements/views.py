@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from rest_framework.decorators import api_view
+from rest_framework.decorators import action, api_view
 from rest_framework.response import Response
 from rest_framework import status
 
@@ -26,11 +26,11 @@ class ArtworkView(viewsets.ModelViewSet):
         img = Image.open(image)
         new_size = (32, 32)
         img = img.resize(new_size)
-        img = np.array(img)   
+        img = np.array(img)
         img = to_tensor(img)
         predictions = neural_network.get_top_n_predictions(img, 3)
         return Response(predictions, status=status.HTTP_201_CREATED)
-    
+
 
 class ArtistView(viewsets.ModelViewSet):
     serializer_class = ArtistSerializer
