@@ -16,6 +16,12 @@
   background-color: #57667f;
 }
 
+.movements-list__option:hover,
+.movements-list__option.selected {
+  background-color: #c2c7d6;
+  color: #343a4c;
+}
+
 .images-list {
   margin: 1em 3rem;
 }
@@ -24,4 +30,5 @@
   max-width: 200px;
   max-height: 200px;
   margin: 10px;
+  vertical-align: middle;
 }

@@ -7,7 +7,7 @@ class ArtMovement(models.Model):
 
     def get_artworks(self):
         """Create a list of artworks"""
-        number_of_artworks = 10
+        number_of_artworks = 20
         artworks = list(Artwork.objects.filter(art_movement__in=[self.label]).values()[:number_of_artworks])
         return artworks
 

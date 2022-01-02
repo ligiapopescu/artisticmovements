@@ -36,7 +36,10 @@ class AvailableArtMovements extends Component {
             />
           );
         });
-        return this.setState({ images: displayImages });
+        return this.setState({
+          images: displayImages,
+          selectedArtMovementId: artMovementId,
+        });
       })
       .catch((err) => console.log(err));
   }
@@ -45,7 +48,6 @@ class AvailableArtMovements extends Component {
     axios
       .get(`${process.env.REACT_APP_BACKEND_API}/api/artisticmovements/`)
       .then((res) => {
-        console.log(res);
         return this.setState({ artMovements: res.data });
       })
       .catch((err) => console.log(err));
@@ -58,7 +60,10 @@ class AvailableArtMovements extends Component {
           {this.state.artMovements.map((item) => (
             <li
               id={"artMovement" + item.id}
-              className="movements-list__option"
+              className={
+                "movements-list__option" +
+                (item.id === this.state.selectedArtMovementId ? " selected" : " ")
+              }
               onClick={() => this.handleArtMovementClick(item.id)}
             >
               {item.name}
