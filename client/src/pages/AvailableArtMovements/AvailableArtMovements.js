@@ -11,6 +11,7 @@ class AvailableArtMovements extends Component {
       images: [],
       artMovements: [],
     };
+    console.log('constructor')
     this.handleArtMovementClick = this.handleArtMovementClick.bind(this);
   }
 
@@ -45,6 +46,7 @@ class AvailableArtMovements extends Component {
   }
 
   refreshImages = () => {
+    console.log('refresh')
     axios
       .get(`${process.env.REACT_APP_BACKEND_API}/api/artisticmovements/`)
       .then((res) => {
@@ -59,10 +61,13 @@ class AvailableArtMovements extends Component {
         <ul className="movements-list">
           {this.state.artMovements.map((item) => (
             <li
+              key={"artMovement" + item.id}
               id={"artMovement" + item.id}
               className={
                 "movements-list__option" +
-                (item.id === this.state.selectedArtMovementId ? " selected" : " ")
+                (item.id === this.state.selectedArtMovementId
+                  ? " selected"
+                  : " ")
               }
               onClick={() => this.handleArtMovementClick(item.id)}
             >

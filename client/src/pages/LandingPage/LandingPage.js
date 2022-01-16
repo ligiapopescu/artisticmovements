@@ -4,7 +4,8 @@ import axios from "axios";
 import Section from "components/UI/Section";
 import TileScroll from "components/TileScrolls/TileScroll";
 import UploadSection from "components/UploadSection/UploadSection";
-import AvailableArtMovements from "components/AvailableArtMovements/AvailableArtMovements";
+// import AvailableArtMovements from "pages/AvailableArtMovements/AvailableArtMovements";
+
 class LandingPage extends Component {
   constructor(props) {
     super(props);
@@ -41,7 +42,6 @@ class LandingPage extends Component {
           title="Available artistic movements"
           description="Explore artworks by artistic movement"
         >
-          <AvailableArtMovements />
         </Section>
       </div>
     );

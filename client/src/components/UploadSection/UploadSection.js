@@ -51,7 +51,9 @@ class UploadSection extends Component {
       <section className="upload-section" data-scroll-section>
         <div className="upload-section__content content-container">
           <div className="upload-section__info">
-            <div className="upload-section__title text-h2">Discover artistic movements</div>
+            <div className="upload-section__title text-h2">
+              Discover artistic movements
+            </div>
             <div className="upload-section__description text-copy text-clr-primary">
               Choose an Artwork from Unsplash or Upload your own
             </div>
@@ -65,6 +67,7 @@ class UploadSection extends Component {
           </div>
           <div className="upload-section__unsplash">
             <UnsplashReact
+              applicationName="ArtisticMovements"
               className="upload-section__photo-search"
               accessKey="eD6WgNG0ZEAqEBQlFeZO9Ckn1Ya7h_9Otdefc2cZEpk"
               columns={3}

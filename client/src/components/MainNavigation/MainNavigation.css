@@ -1,0 +1,33 @@
+.navigation-menu {
+  padding: 20px 100px 10px 30px;
+  height: 80px;
+  display: block;
+  background-color: #3f485a;
+}
+
+.navigation-menu__link,
+.navigation-menu__home {
+  font-size: 1.5rem;
+  font-weight: 500;
+  display: inline;
+  margin: 0 20px;
+}
+
+.navigation-menu__link > a,
+.navigation-menu__home > a {
+  color: #fff6eb;
+  text-decoration: none;
+}
+
+.navigation-menu__navigation-list {
+  float: right;
+  margin: 0;
+}
+
+.navigation-menu__navigation-list ul {
+    margin: 0;
+}
+
+.navigation-menu__home {
+  float: left;
+}

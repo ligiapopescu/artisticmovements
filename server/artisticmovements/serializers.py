@@ -1,7 +1,15 @@
 from rest_framework import serializers
 from .models import ArtMovement, Artwork, Artist
-
-
+from django.contrib.auth.models import User, Group
+from rest_framework import serializers
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = User
+        fields = ['url', 'username', 'email', 'groups']
+class GroupSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Group
+        fields = ['url', 'name']
 class ArtMovementSerializer(serializers.ModelSerializer):
     artwork_list = serializers.ListField(source='get_artworks')
     class Meta:

@@ -21,5 +21,5 @@ class ArtMovementAdmin(admin.ModelAdmin):
 @admin.register(Artwork)
 class ArtworkAdmin(admin.ModelAdmin):
     list_display = ('title', 'artist', 'display_art_movements', 'uploaded_by_user', 'id')
-    list_filter = ('art_movement', 'artist')
+    list_filter = ('uploaded_by_user', 'art_movement', 'artist')
  

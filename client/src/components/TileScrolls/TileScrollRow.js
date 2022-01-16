@@ -21,9 +21,12 @@ export default (props) => {
         />
       );
     } else if (image.type == "upload") {
-        rowImages.push(
-            <UploadArtwork className="tiles__line-img"></UploadArtwork>
-        )
+      rowImages.push(
+        <UploadArtwork
+          className="tiles__line-img"
+          key={imageIdx}
+        ></UploadArtwork>
+      );
     }
   }
 

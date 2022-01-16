@@ -19,7 +19,7 @@ export default (props) => {
       >
         <div className="tiles__wrap">
           {Array.from({ length: config.rowsNumber }, (_, i) => (
-            <TileScrollRow rowNumber={i} tileScrollConfig={config} />
+            <TileScrollRow rowNumber={i} tileScrollConfig={config} key={`${tileScrollType}_${i}`}/>
           ))}
         </div>
       </section>
