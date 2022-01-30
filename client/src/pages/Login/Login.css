@@ -1,0 +1,22 @@
+.login-wrapper {
+  width: fit-content;
+  margin: auto;
+}
+
+.login-wrapper span {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+button[type="submit"] {
+  background-color: #3f485a;
+  font-size: 1rem;
+  text-align: center;
+  font-family: "Roboto";
+  border: 0;
+  border-radius: 2em;
+  color: #ffffff;
+  padding: 3%;
+  margin: 10px 0;
+  cursor: pointer;
+}

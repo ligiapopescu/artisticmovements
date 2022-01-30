@@ -3,7 +3,8 @@ from rest_framework.decorators import action, api_view
 from rest_framework.response import Response
 from rest_framework import status
 
-from .serializers import *#ArtMovementSerializer, ArtworkSerializer, ArtistSerializer
+# ArtMovementSerializer, ArtworkSerializer, ArtistSerializer
+from .serializers import *
 from .models import Artwork, Artist, ArtMovement
 
 import numpy as np
@@ -14,21 +15,36 @@ import neuralnetwork.ArtisticMovementRecognition as neural_network
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
+from rest_framework.authtoken.models import Token
+
 class UserViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
-    # permission_classes = [permissions.IsAuthenticated]
+
+    def create(self, request):
+        serializer = self.get_serializer(data=request.data)
+        isValid = serializer.is_valid()
+        print('isValid', isValid)
+        if isValid == True:
+            serializer.save()
+            user = User.objects.get_or_create(username=serializer.data['username'])[0]
+            user.set_password(serializer.data['password'])
+            user.save()
+            token = Token.objects.get_or_create(user=user)[0]
+            responseData = {"token": token.key}
+            membergroup = Group.objects.get(name="Member")
+            membergroup.user_set.add(user)
+            return Response(responseData, status=status.HTTP_201_CREATED)
+        else:
+            responseData = {"message": "Data is not valid!"}
+            return Response(responseData, None)
+        
 
 class GroupViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     permission_classes = [permissions.IsAuthenticated]
+
 
 class ArtMovementView(viewsets.ModelViewSet):
     serializer_class = ArtMovementSerializer

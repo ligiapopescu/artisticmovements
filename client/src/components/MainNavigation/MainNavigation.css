@@ -1,33 +1,71 @@
+/* TB Deleted after reset css */
+ul,
+li,
+a {
+  margin: 0;
+  padding: 0;
+}
+
 .navigation-menu {
-  padding: 20px 100px 10px 30px;
-  height: 80px;
+  padding: 1rem;
+  padding: auto;
+  height: 50px;
   display: block;
   background-color: #3f485a;
+  font-size: 1.3rem;
+  font-weight: 100;
+  color: #fff6eb;
 }
 
-.navigation-menu__link,
-.navigation-menu__home {
-  font-size: 1.5rem;
-  font-weight: 500;
-  display: inline;
-  margin: 0 20px;
-}
-
-.navigation-menu__link > a,
-.navigation-menu__home > a {
+.navigation-menu a {
   color: #fff6eb;
   text-decoration: none;
 }
 
-.navigation-menu__navigation-list {
+.navigation-menu__option {
+  display: inline-block;
+  position: relative;
+  margin: 0 20px;
+  padding: 0 15px;
+  cursor: pointer;
+}
+
+.navigation-menu > nav {
   float: right;
   margin: 0;
 }
 
-.navigation-menu__navigation-list ul {
-    margin: 0;
+.navigation-menu__option ul {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  transition: all 0.5s ease;
+  margin-top: 1rem;
+  left: 0;
+  display: none;
+  list-style-type: none;
+  width: 100%;
+  padding: inherit;
 }
 
-.navigation-menu__home {
-  float: left;
+.navigation-menu__option:hover ul,
+.navigation-menu__option ul:hover,
+.navigation-menu__option li:hover {
+  visibility: visible;
+  opacity: 1;
+  display: block;
+  margin: 0 auto;
+  z-index: 100;
+  background-color: #3f485a;
+  font-size: 1.18rem;
+}
+
+.navigation-menu__option ul li {
+  clear: both;
+  padding: 6px 0;
+  width: 100%;
+}
+
+.navigation-menu__option ul li:hover {
+  opacity: 0.5;
 }

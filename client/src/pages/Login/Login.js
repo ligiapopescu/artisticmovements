@@ -1,56 +1,91 @@
-import React, { useReducer, Component } from "react";
-import axios from "axios";
+import React, { useState, useContext } from "react";
 import "./Login.css";
+import AuthenticationContext from "store/authentication-context";
 
-class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+export default function Login(props) {
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
+  const [passwordConfirmation, setPasswordConfirmation] = useState();
+  const [existingUser, setExistingUser] = useState();
+  const authContext = useContext(AuthenticationContext);
+  const [errorMessage, setErrorMessage] = useState();
 
-  handleSubmit(event) {
+  console.log("authContext", authContext);
+  console.log("errorMessage", errorMessage);
+  function handleSubmit(event) {
     event.preventDefault();
     let formData = new FormData();
-    formData.append("username", "logintest");
-    formData.append("password", "logintest");
-    console.log("event", event);
+    formData.append("username", username);
+    formData.append("password", password);
 
-    axios
-      .post(`${process.env.REACT_APP_BACKEND_API}/api/users/`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then((response) => {
-        console.log("response", response);
-      })
-      .catch((response) => {
-        console.log("response error:", response);
-      });
+    if (existingUser) {
+      authContext.login(formData);
+    } else {
+      formData.append("passwordConfirmation", passwordConfirmation);
+      if (password != passwordConfirmation) {
+        setErrorMessage("Passwords do not match");
+      } else {
+        setErrorMessage(null);
+        authContext.signup(formData);
+      }
+    }
   }
 
-  render() {
-    return (
-      <div className="login-wrapper">
-        <form onSubmit={this.handleSubmit}>
-          <fieldset>
+  function changeAction() {
+    setExistingUser(!existingUser);
+  }
+
+  return (
+    <div className="login-wrapper">
+      {!authContext.userIsAuthenticated && errorMessage && <div>{errorMessage}</div>}
+      {!authContext.userIsAuthenticated && authContext.authenticationErrorMessage && (
+        <div>{authContext.authenticationErrorMessage} </div>
+      )}
+      {!authContext.userIsAuthenticated && (
+        <form onSubmit={handleSubmit}>
+          <label>
+            <p>Username</p>
+            <input
+              type="text"
+              name="username"
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </label>
+          <label>
+            <p>Password</p>
+            <input
+              type="password"
+              name="password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </label>
+          {!existingUser && (
             <label>
-              <p>Username</p>
-              <input type="text" name="username"/>
+              <p>Confirm Password</p>
+              <input
+                type="password"
+                name="passwordConfirmation"
+                onChange={(e) => setPasswordConfirmation(e.target.value)}
+              />
             </label>
-            <label>
-              <p>Password</p>
-              <input type="password" name="password"/>
-            </label>
-          </fieldset>
+          )}
           <div>
             <button type="submit">Submit</button>
           </div>
+          {existingUser ? (
+            <div>
+              Don't have an account?
+              <span onClick={changeAction}> Sign up </span>
+            </div>
+          ) : (
+            <div>
+              Already have an account?
+              <span onClick={changeAction}> Sign in </span>
+            </div>
+          )}
         </form>
-      </div>
-    );
-  }
+      )}
+      {authContext.userIsAuthenticated && "User already log in"}
+    </div>
+  );
 }
-
-export default Login;

@@ -1,33 +1,43 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
+import { useContext } from "react";
 import "./MainNavigation.css";
+import AuthenticationContext from "store/authentication-context";
 
-class MainNavigation extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+function MainNavigation(props) {
+  const authContext = useContext(AuthenticationContext);
 
-  render() {
-    return (
-      <header className="navigation-menu">
-        <div className="navigation-menu__home">
-          <Link to="/">Home</Link>
-        </div>
-        <nav className="navigation-menu__navigation-list">
-          <ul>
-            <li className="navigation-menu__link">
-              <Link to="/availableArtMovements">Art Movements</Link>
+  return (
+    <header className="navigation-menu">
+      <div className="navigation-menu__option">
+        <Link to="/">Home</Link>
+      </div>
+      <nav>
+        <ul>
+          <li className="navigation-menu__option">
+            <Link to="/availableArtMovements">Art Movements</Link>
+          </li>
+          {authContext.userIsAuthenticated ? (
+            <li className="navigation-menu__option">
+              My account
+              <ul>
+                <li>
+                  <Link to="/">My wall</Link>
+                </li>
+                <li onClick={authContext.logout}>
+                  <Link to="/">Log out</Link>
+                </li>
+              </ul>
             </li>
-            <li className="navigation-menu__link">
-              <Link to="/login">Login</Link>
+          ) : (
+            <li className="navigation-menu__option">
+              <Link to="/login">Log in</Link>
             </li>
-          </ul>
-        </nav>
-      </header>
-    );
-  }
+          )}
+        </ul>
+      </nav>
+    </header>
+  );
 }
 
 export default MainNavigation;

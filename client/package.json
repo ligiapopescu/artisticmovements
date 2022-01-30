@@ -17,6 +17,7 @@
     "react-normalize": "^0.4.4",
     "react-router-dom": "^6.2.1",
     "react-scripts": "4.0.3",
+    "reset-css": "^5.0.1",
     "unsplash-react": "^0.2.1",
     "web-vitals": "^1.1.2"
   },
