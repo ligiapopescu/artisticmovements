@@ -8,7 +8,6 @@ from rest_framework import routers
 from django.urls import include
 from artisticmovements import views
 from rest_framework.authtoken import views as viewsauth
-# from django.contrib.auth.views import login
 
 router = routers.DefaultRouter()
 router.register(r'artisticmovements', views.ArtMovementView, 'artmovement')
@@ -19,11 +18,12 @@ router.register(r'groups', views.GroupViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/user-information/', views.GetLoggedUserInformation.as_view()),
+    path('api/user-artist/', views.UserArtistDetail.as_view()),
+    path('api/artwork-review/<int:pk>/', views.ArtworkReview.as_view()),
     path('api/', include(router.urls)),
     path('api-token-auth/', viewsauth.obtain_auth_token, name='api-token-auth'),
 ]
-
-# Use static() to add url mapping to serve static files during development (only)
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

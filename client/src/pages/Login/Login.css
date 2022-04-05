@@ -8,7 +8,11 @@
   font-weight: 600;
 }
 
-button[type="submit"] {
+.login-wrapper label {
+  display: block;
+}
+
+/* button[type="submit"] {
   background-color: #3f485a;
   font-size: 1rem;
   text-align: center;
@@ -19,4 +23,4 @@ button[type="submit"] {
   padding: 3%;
   margin: 10px 0;
   cursor: pointer;
-}
+} */

@@ -8,12 +8,17 @@ const AuthenticationContext = createContext({
   logout: () => {},
   signup: (userData) => {},
   authenticationErrorMessage: null,
+  userInformation: {},
+  updateUserInformation: () => {}
 });
 
 export function AuthenticationContextProvider(props) {
-  const [authenticationToken, setAuthenticationToken] = useState();
+  const [authenticationToken, setAuthenticationToken] = useState(
+    sessionStorage.getItem("authenticationToken")
+  );
   const [authenticationErrorMessage, setAuthenticationErrorMessage] =
     useState();
+  const [userInformation, setUserInformation] = useState();
 
   function login(userData) {
     axios
@@ -76,6 +81,21 @@ export function AuthenticationContextProvider(props) {
     }
   }
 
+  function getUserInformation() {    
+    axios
+      .get(`${process.env.REACT_APP_BACKEND_API}/api/user-information/`, {
+        headers: { Authorization: `Token ${authenticationToken}` },
+      })
+      .then((res) => {
+        setUserInformation(res.data);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  if (authenticationToken && !userInformation) {
+    getUserInformation()
+  }
+
   const context = {
     authenticationToken: authenticationToken,
     userIsAuthenticated:
@@ -83,7 +103,9 @@ export function AuthenticationContextProvider(props) {
     login: login,
     logout: logout,
     signup: signup,
-    authenticationErrorMessage: authenticationErrorMessage
+    authenticationErrorMessage: authenticationErrorMessage,
+    userInformation: userInformation,
+    updateUserInformation: getUserInformation
   };
 
   return (

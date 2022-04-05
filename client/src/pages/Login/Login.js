@@ -10,8 +10,6 @@ export default function Login(props) {
   const authContext = useContext(AuthenticationContext);
   const [errorMessage, setErrorMessage] = useState();
 
-  console.log("authContext", authContext);
-  console.log("errorMessage", errorMessage);
   function handleSubmit(event) {
     event.preventDefault();
     let formData = new FormData();
@@ -85,7 +83,7 @@ export default function Login(props) {
           )}
         </form>
       )}
-      {authContext.userIsAuthenticated && "User already log in"}
+      {authContext.userIsAuthenticated && "Log in with success"}
     </div>
   );
 }

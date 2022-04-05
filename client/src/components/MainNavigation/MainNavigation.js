@@ -3,40 +3,34 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import "./MainNavigation.css";
 import AuthenticationContext from "store/authentication-context";
-
+import { Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
 function MainNavigation(props) {
   const authContext = useContext(AuthenticationContext);
-
   return (
-    <header className="navigation-menu">
-      <div className="navigation-menu__option">
-        <Link to="/">Home</Link>
-      </div>
-      <nav>
-        <ul>
-          <li className="navigation-menu__option">
-            <Link to="/availableArtMovements">Art Movements</Link>
-          </li>
+    <Navbar bg="dark" variant="dark">
+      <Container>
+        <Navbar.Brand href="/">Home</Navbar.Brand>
+        <Nav className="me-auto">
+          <Nav.Link href="/availableArtMovements">Art movements</Nav.Link>
+          <Nav.Link href="/artGallery"> Art Gallery</Nav.Link>
+        </Nav>
+        <Nav>
           {authContext.userIsAuthenticated ? (
-            <li className="navigation-menu__option">
-              My account
-              <ul>
-                <li>
-                  <Link to="/">My wall</Link>
-                </li>
-                <li onClick={authContext.logout}>
-                  <Link to="/">Log out</Link>
-                </li>
-              </ul>
-            </li>
+            <NavDropdown title="Account" id="collasible-nav-dropdown">
+              <NavDropdown.Item href="/myAccount">My account</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item onClick={authContext.logout}>
+                Log out
+              </NavDropdown.Item>
+            </NavDropdown>
           ) : (
             <li className="navigation-menu__option">
-              <Link to="/login">Log in</Link>
+              <Nav.Link href="/login">Log in</Nav.Link>
             </li>
           )}
-        </ul>
-      </nav>
-    </header>
+        </Nav>
+      </Container>
+    </Navbar>
   );
 }
 

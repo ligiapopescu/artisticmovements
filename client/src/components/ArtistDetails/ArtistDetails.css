@@ -1,0 +1,11 @@
+.artist-details {
+    margin: 5px 0;
+}
+
+.artist-details__remove-artist {
+    float: right;
+}
+
+.artist-details__name {
+    font-size: 2.5em;
+}

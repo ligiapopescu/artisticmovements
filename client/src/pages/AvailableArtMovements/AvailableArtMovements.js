@@ -11,7 +11,6 @@ class AvailableArtMovements extends Component {
       images: [],
       artMovements: [],
     };
-    console.log('constructor')
     this.handleArtMovementClick = this.handleArtMovementClick.bind(this);
   }
 
@@ -25,6 +24,7 @@ class AvailableArtMovements extends Component {
         `${process.env.REACT_APP_BACKEND_API}/api/artisticmovements/${artMovementId}/`
       )
       .then((res) => {
+
         let displayImages = res.data.artwork_list;
         displayImages = displayImages.map(function (img) {
           return (
@@ -46,7 +46,6 @@ class AvailableArtMovements extends Component {
   }
 
   refreshImages = () => {
-    console.log('refresh')
     axios
       .get(`${process.env.REACT_APP_BACKEND_API}/api/artisticmovements/`)
       .then((res) => {

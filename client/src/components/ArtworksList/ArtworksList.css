@@ -1,0 +1,24 @@
+.artwork-list.card-group {
+  width: fit-content;
+}
+
+.artwork-list .card {
+  width: fit-content;
+  height: fit-content;
+}
+
+.artwork-list .card-img-top {
+  height: 250px;
+  width: 250px;
+  object-fit: cover;
+}
+
+.artwork-list {
+  color: black;
+}
+.artwork-list .btn-close {
+  float: right;
+}
+.like-button {
+  float: right;
+}

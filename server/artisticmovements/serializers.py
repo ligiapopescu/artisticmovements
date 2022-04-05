@@ -16,15 +16,15 @@ class ArtMovementSerializer(serializers.ModelSerializer):
         model = ArtMovement
         fields = ('id', 'name', 'label', 'artwork_list', 'number_of_artworks')
 
-
 class ArtworkSerializer(serializers.ModelSerializer):
     class Meta:
         model = Artwork
         fields = ('id', 'title', 'artist', 'art_movement',
-                  'artwork_image', 'uploaded_by_user')
+                  'artwork_image', 'uploaded_by_user', 'appreciated_by')
 
 
 class ArtistSerializer(serializers.ModelSerializer):
+    artworkList = serializers.ListField(source="get_artworks")
     class Meta:
         model = Artist
-        fields = ('id', 'full_name')
+        fields = ('id', 'full_name', 'artworkList')
