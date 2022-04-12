@@ -15,7 +15,6 @@ export default function ArtGallery(props) {
   const [filteredArtists, setFilteredArtists] = useState([]);
   const [filteredArtMovements, setFilteredArtMovements] = useState([]);
   const [sortByLikes, setSortByLikes] = useState("desc");
-
   useEffect(
     function () {
       const content = [];
@@ -33,7 +32,14 @@ export default function ArtGallery(props) {
       );
       setDisplayedContent(sortedContent);
     },
-    [filteredArtists, filteredArtMovements, sortByLikes, artContentContext, authContext, artContentContext.artists]
+    [
+      filteredArtists,
+      filteredArtMovements,
+      sortByLikes,
+      artContentContext,
+      authContext,
+      artContentContext.artists,
+    ]
   );
 
   function filterByArtists(artContent, filterArtists) {
@@ -90,11 +96,11 @@ export default function ArtGallery(props) {
   function sortContentByLikes(artContent, sortByLikes) {
     let sortedContent = [...artContent];
     if (sortByLikes === "asc") {
-      sortedContent.sort(function(a, b) {
+      sortedContent.sort(function (a, b) {
         return a.numberOfLikes - b.numberOfLikes;
       });
     } else if (sortByLikes === "desc") {
-      sortedContent.sort(function(a, b) {
+      sortedContent.sort(function (a, b) {
         return b.numberOfLikes - a.numberOfLikes;
       });
     } else {
@@ -105,7 +111,7 @@ export default function ArtGallery(props) {
   }
 
   function changeSortingByLikes() {
-    setSortByLikes(sortByLikes === "desc" ? "asc" : "desc")
+    setSortByLikes(sortByLikes === "desc" ? "asc" : "desc");
   }
 
   return (
@@ -127,11 +133,9 @@ export default function ArtGallery(props) {
             />
           </Col>
           <Col md={{ span: 4, offset: 4 }}>
-            <Button
-              variant="light"
-              onClick = {changeSortingByLikes}
-            >
-              Sort by likes {sortByLikes === "desc" ? "ascending" : "descending"}
+            <Button variant="light" onClick={changeSortingByLikes}>
+              Sort by likes{" "}
+              {sortByLikes === "desc" ? "ascending" : "descending"}
             </Button>
           </Col>
         </Row>
@@ -139,7 +143,11 @@ export default function ArtGallery(props) {
           {displayedContent ? (
             <ArtistsList
               artists={displayedContent}
-              hasOwnerRights={false}
+              hasOwnerRights={
+                authContext &&
+                authContext.userInformation &&
+                authContext.userInformation.isContentAdmin
+              }
               canReview={
                 authContext &&
                 authContext.userIsAuthenticated &&

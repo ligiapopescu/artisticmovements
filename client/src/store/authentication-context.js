@@ -9,7 +9,7 @@ const AuthenticationContext = createContext({
   signup: (userData) => {},
   authenticationErrorMessage: null,
   userInformation: {},
-  updateUserInformation: () => {}
+  updateUserInformation: () => {},
 });
 
 export function AuthenticationContextProvider(props) {
@@ -81,19 +81,23 @@ export function AuthenticationContextProvider(props) {
     }
   }
 
-  function getUserInformation() {    
+  function getUserInformation() {
     axios
       .get(`${process.env.REACT_APP_BACKEND_API}/api/user-information/`, {
         headers: { Authorization: `Token ${authenticationToken}` },
       })
       .then((res) => {
-        setUserInformation(res.data);
+        console.log("res.data", res.data);
+        const userInformation = res.data;
+        userInformation.isContentAdmin =
+          res.data.groups.includes("Content Admin");
+        setUserInformation(userInformation);
       })
       .catch((err) => console.log(err));
   }
 
   if (authenticationToken && !userInformation) {
-    getUserInformation()
+    getUserInformation();
   }
 
   const context = {
@@ -105,7 +109,7 @@ export function AuthenticationContextProvider(props) {
     signup: signup,
     authenticationErrorMessage: authenticationErrorMessage,
     userInformation: userInformation,
-    updateUserInformation: getUserInformation
+    updateUserInformation: getUserInformation,
   };
 
   return (

@@ -57,7 +57,6 @@ class ArtworkView(viewsets.ModelViewSet):
     queryset = Artwork.objects.all()
 
     def create(self, request):
-        print('request.FILES.getlist(artwork_image)', request.FILES.getlist('artwork_image'))
         image = request.FILES.getlist('artwork_image')[0]
         img = Image.open(image)
         new_size = (32, 32)
@@ -93,6 +92,12 @@ class GetLoggedUserInformation(APIView):
         if request.user.is_authenticated:
             userArtists = Artist.objects.filter(user=request.user)
             response["artists"] = ArtistSerializer(userArtists, many=True).data
+            user = User.objects.filter(username=request.user.username)
+            groups = []
+            for g in request.user.groups.all():
+                groups.append(g.name)
+            response["groups"] = groups
+
         return Response(response)
     
 class UserArtistDetail(APIView):
