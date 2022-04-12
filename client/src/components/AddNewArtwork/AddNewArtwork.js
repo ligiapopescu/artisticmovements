@@ -12,7 +12,6 @@ import {
 import axios from "axios";
 import AuthenticationContext from "store/authentication-context";
 import "./AddNewArtwork.css";
-function handleSubmit() {}
 
 export default function AddNewArtwork(props) {
   const [open, setOpen] = useState(false);
@@ -28,6 +27,8 @@ export default function AddNewArtwork(props) {
     formData.append("artistId", props.artistId);
     formData.append("artwork_image", artworkFile);
     formData.append("uploaded_by_user", true);
+    console.log('formData', formData)
+    console.log('artworkFile', artworkFile)
     axios
       .post(`${process.env.REACT_APP_BACKEND_API}/api/artworks/`, formData, {
         headers: {
@@ -72,7 +73,9 @@ export default function AddNewArtwork(props) {
               </InputGroup>
               <Form.Group controlId="imageUpload" className="mb-3">
                 <Form.Label>Upload artwork image</Form.Label>
-                <Form.Control type="file" onChange={(e) => setArtworkFile(e.target.files[0])}/>
+                <Form.Control type="file" onChange={(e) => {
+                  return setArtworkFile(e.target.files[0])
+                }}/>
               </Form.Group>
             </Col>
           </Row>

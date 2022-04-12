@@ -3,22 +3,31 @@
   position: relative;
   overflow: hidden;
   text-align: left;
+  line-height: 1;
 }
 
 .section__title {
-  padding: 1rem 0 2rem 7rem;
+  padding: 1rem 0 1rem 0;
   color: #fff6eb;
   display: block;
   font-weight: 500;
   font-size: 3rem;
+  width: 90%;
+  margin: auto;
+}
+
+@media (max-width: 576px) {
+  .section__title {
+    font-size: 2rem;
+  }
 }
 
 .section__description {
-  padding: 0.5rem 0 2rem 7rem;
+  padding: 0.5rem 0 1.5rem 0;
   display: block;
-
   color: #7f6a57;
-  width: 50%;
+  width: 90%;
+  margin: auto;
 }
 
 .section__content {

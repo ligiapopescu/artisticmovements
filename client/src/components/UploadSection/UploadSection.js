@@ -5,7 +5,7 @@ import "./UploadSection.css";
 import TileScroll from "components/TileScrolls/TileScroll";
 import UnsplashReact, { BlobUploader, withDefaultProps } from "unsplash-react";
 import ImageWithLabel from "../UI/ImageWithLabel";
-
+import Form from "react-bootstrap/Form";
 class UploadSection extends Component {
   constructor(props) {
     super(props);
@@ -15,6 +15,13 @@ class UploadSection extends Component {
       label: null,
     };
     this.handleUpload = this.handleUpload.bind(this);
+    this.handleUploadControl = this.handleUploadControl.bind(this);
+  }
+
+  handleUploadControl(uploadResult) {
+    if (uploadResult && uploadResult.target && uploadResult.target.files) {
+      this.handleUpload(uploadResult.target.files[0]);
+    }
   }
 
   handleUpload(upload) {
@@ -57,12 +64,19 @@ class UploadSection extends Component {
             <div className="upload-section__description text-copy text-clr-primary">
               Choose an Artwork from Unsplash or Upload your own
             </div>
-            {this.state.file && (
+            {this.state.file ? (
               <ImageWithLabel
                 className="upload-section__image"
                 image={this.state.file}
                 label={this.state.label}
               />
+            ) : (
+              <Form.Group
+                controlId="formFile"
+                className="upload-section__input"
+              >
+                <Form.Control type="file" onChange={this.handleUploadControl} />
+              </Form.Group>
             )}
           </div>
           <div className="upload-section__unsplash">

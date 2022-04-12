@@ -1,20 +1,40 @@
+.upload-section {
+  line-height: 1;
+}
+
 .upload-section__content {
   display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
 }
 
 .upload-section__info {
-  width: 500px;
-  margin-right: 100px;
+  width: 50%;
+  margin: 0 auto;
 }
 
 .upload-section__unsplash {
-  margin-left: auto;
+  margin: auto;
   width: 625px;
   height: 568px;
 }
 
+.upload-section__input {
+  width: 55%;
+  margin: 3% 5%;
+}
+
+@media (max-width: 425px) {
+  .upload-section__input {
+    width: 90%;
+  }
+}
+
 .upload-section__title {
-  padding-bottom: 0.6em;
+  padding-bottom: 0.1em;
+  width: 90%;
+  margin: auto;
 }
 
 .upload-section__image {
@@ -23,8 +43,10 @@
   height: 395px;
 }
 
-.section__description {
-  padding-bottom: 1em;
+.upload-section__description {
+  padding: 1rem 0 1.5rem 0;
+  width: 90%;
+  margin: auto;
 }
 
 .unsplash-react input {
@@ -37,4 +59,10 @@
 
 .unsplash-react > div:last-child > div:first-child {
   overflow: hidden !important;
+}
+
+@media (max-width: 576px) {
+  .upload-section__info {
+    width: 100%;
+  }
 }

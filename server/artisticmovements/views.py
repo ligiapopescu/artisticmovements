@@ -57,6 +57,7 @@ class ArtworkView(viewsets.ModelViewSet):
     queryset = Artwork.objects.all()
 
     def create(self, request):
+        print('request.FILES.getlist(artwork_image)', request.FILES.getlist('artwork_image'))
         image = request.FILES.getlist('artwork_image')[0]
         img = Image.open(image)
         new_size = (32, 32)

@@ -8,40 +8,11 @@ import {
 } from "react-bootstrap";
 import "./ArtworksList.css";
 import axios from "axios";
+import ArtContentContext from "store/art-content-context";
 
 export default function ArtworksList(props) {
   const authContext = useContext(AuthenticationContext);
-  function deleteArtwork(id) {
-    axios
-      .delete(`${process.env.REACT_APP_BACKEND_API}/api/artworks/${id}/`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Token ${authContext.authenticationToken}`,
-        },
-      })
-      .then((res) => {
-        authContext.updateUserInformation();
-      })
-      .catch((err) => console.log(err));
-  }
-
-  function reviewArtwork(id) {
-    axios
-      .post(
-        `${process.env.REACT_APP_BACKEND_API}/api/artwork-review/${id}/`,
-        {},
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Token ${authContext.authenticationToken}`,
-          },
-        }
-      )
-      .then((res) => {
-        authContext.updateUserInformation();
-      })
-      .catch((err) => console.log(err));
-  }
+  const artContentContext = useContext(ArtContentContext);
 
   return (
     <CardGroup className="artwork-list">
@@ -51,7 +22,7 @@ export default function ArtworksList(props) {
             <Card.Header>
               {artwork.title}
               {props.hasOwnerRights && (
-                <CloseButton onClick={() => deleteArtwork(artwork.id)} />
+                <CloseButton onClick={() => artContentContext.deleteArtwork(artwork.id, authContext.authenticationToken)} />
               )}
             </Card.Header>
             <Card.Img
@@ -67,7 +38,7 @@ export default function ArtworksList(props) {
             <small className="text-muted">Number of likes: {artwork.appreciated_by.length}</small>
               {authContext.userIsAuthenticated && <Button
                 className="like-button"
-                onClick={() => reviewArtwork(artwork.id)}
+                onClick={() => artContentContext.reviewArtwork(artwork.id, authContext.authenticationToken)}
                 variant={artwork.appreciated_by.includes(authContext.userInformation.username) ? "info": "outline-info"}
               >
                 Like

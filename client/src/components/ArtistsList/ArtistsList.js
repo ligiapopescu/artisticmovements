@@ -10,15 +10,17 @@ export default function ArtistsList(props) {
         <Row>
           {props.artists.map((artist) => {
             return (
-              <Row>
+              <Row key={artist.id}>
                 <hr />
-                <ArtistDetails
+                {((artist.artworkList && artist.artworkList.length > 0) || props.hasOwnerRights) && <ArtistDetails
                   name={artist.full_name}
+                  badgeLikes = {artist.numberOfLikes}
                   artworks={artist.artworkList}
                   hasOwnerRights={props.hasOwnerRights}
                   id={artist.id}
-                  key={artist.id}
+                  
                 />
+                }
               </Row>
             );
           })}

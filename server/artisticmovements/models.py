@@ -82,6 +82,8 @@ class Artist(models.Model):
         for artwork in artwork_objects:     
             appreciated_by = Artwork.objects.get(id=artwork['id']).appreciated_by.all().values_list('username', flat=True)
             artwork['appreciated_by'] = list(set(appreciated_by))
+            art_movements = Artwork.objects.get(id=artwork['id']).art_movement.all().values_list('name', flat=True)
+            artwork['art_movements'] = list(set(art_movements))
             final_list.append(artwork)
         return list(final_list)
 
