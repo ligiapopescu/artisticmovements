@@ -6,11 +6,11 @@ import TileScroll from "components/TileScrolls/TileScroll";
 import UnsplashReact, { BlobUploader, withDefaultProps } from "unsplash-react";
 import ImageWithLabel from "../UI/ImageWithLabel";
 import Form from "react-bootstrap/Form";
+
 class UploadSection extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      uploaded: false,
       file: null,
       label: null,
     };
@@ -25,6 +25,12 @@ class UploadSection extends Component {
   }
 
   handleUpload(upload) {
+    // Clear previous result immediately so spinner shows
+    this.setState({
+      file: URL.createObjectURL(upload),
+      label: null,
+    });
+
     let formData = new FormData();
     formData.append("title", "Uploaded by user");
     formData.append("artwork_image", upload, "image.jpg");
@@ -47,10 +53,6 @@ class UploadSection extends Component {
       .catch((response) => {
         console.log("response error:", response);
       });
-
-    this.setState({
-      file: URL.createObjectURL(upload),
-    });
   }
 
   render() {
@@ -64,20 +66,19 @@ class UploadSection extends Component {
             <div className="upload-section__description text-copy text-clr-primary">
               Choose an Artwork from Unsplash or Upload your own
             </div>
-            {this.state.file ? (
+            {this.state.file && (
               <ImageWithLabel
                 className="upload-section__image"
                 image={this.state.file}
                 label={this.state.label}
               />
-            ) : (
-              <Form.Group
-                controlId="formFile"
-                className="upload-section__input"
-              >
-                <Form.Control type="file" onChange={this.handleUploadControl} />
-              </Form.Group>
             )}
+            <Form.Group
+              controlId="formFile"
+              className="upload-section__input"
+            >
+              <Form.Control type="file" onChange={this.handleUploadControl} />
+            </Form.Group>
           </div>
           <div className="upload-section__unsplash">
             <UnsplashReact
