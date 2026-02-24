@@ -22,7 +22,9 @@
 
 .upload-section__input {
   width: 55%;
-  margin: 3% 5%;
+  margin: 3% auto;
+  display: flex;
+  justify-content: center;
 }
 
 @media (max-width: 425px) {
