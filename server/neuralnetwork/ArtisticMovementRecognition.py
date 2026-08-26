@@ -170,12 +170,22 @@ def get_top_n_predictions(tensorImage, n):
     return topPredictions
 
 
+_model = None
+
+
+def get_model():
+    global _model
+    if _model is None:
+        _model = torch.load('neuralnetwork/torch_model')
+        _model.eval()
+    return _model
+
+
 def get_predictions(tensorImage):
-    processed_images = []
-    processed_images.append(tensorImage)
     model_input = torch.unsqueeze(tensorImage, 0)
-    model = torch.load('neuralnetwork/torch_model')
-    prediction = model(model_input)
+    model = get_model()
+    with torch.no_grad():
+        prediction = model(model_input)
     return prediction
 
 

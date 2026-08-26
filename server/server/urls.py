@@ -18,6 +18,7 @@ router.register(r'groups', views.GroupViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/warmup/', views.warmup),
     path('api/user-information/', views.GetLoggedUserInformation.as_view()),
     path('api/user-artist/', views.UserArtistDetail.as_view()),
     path('api/artwork-review/<int:pk>/', views.ArtworkReview.as_view()),

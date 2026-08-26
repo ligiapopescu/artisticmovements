@@ -21,6 +21,15 @@ from rest_framework import permissions
 from rest_framework.authtoken.models import Token
 from rest_framework import authentication, permissions
 
+@api_view(['GET'])
+def warmup(request):
+    # Force-load the torch model into memory so the first user request
+    # doesn't pay the cold-start cost. Safe to call repeatedly — get_model
+    # caches after the first load.
+    neural_network.get_model()
+    return Response({"status": "ready"}, status=status.HTTP_200_OK)
+
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer

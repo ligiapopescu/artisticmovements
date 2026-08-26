@@ -41,6 +41,7 @@ class UploadSection extends Component {
         headers: {
           "Content-Type": "multipart/form-data",
         },
+        timeout: 90000,
       })
       .then((response) => {
         const predictions = response.data.map(
@@ -50,12 +51,22 @@ class UploadSection extends Component {
           label: predictions.join(" \n"),
         });
       })
-      .catch((response) => {
-        console.log("response error:", response);
+      .catch((error) => {
+        console.log("response error:", error);
+        this.setState({
+          label: "Couldn't get a prediction. Please try again.",
+        });
       });
   }
 
   render() {
+    const { backendStatus } = this.props;
+    const ready = backendStatus === "ready";
+    const waitMessage =
+      backendStatus === "error"
+        ? "Backend unavailable. Please refresh."
+        : "Waking backend — please wait…";
+
     return (
       <section className="upload-section" data-scroll-section>
         <div className="upload-section__content content-container">
@@ -77,10 +88,25 @@ class UploadSection extends Component {
               controlId="formFile"
               className="upload-section__input"
             >
-              <Form.Control type="file" onChange={this.handleUploadControl} />
+              <Form.Control
+                type="file"
+                onChange={this.handleUploadControl}
+                disabled={!ready}
+              />
             </Form.Group>
+            {!ready && (
+              <div className="upload-section__wait text-copy text-clr-primary">
+                {waitMessage}
+              </div>
+            )}
           </div>
-          <div className="upload-section__unsplash">
+          <div
+            className="upload-section__unsplash"
+            style={{
+              opacity: ready ? 1 : 0.5,
+              pointerEvents: ready ? "auto" : "none",
+            }}
+          >
             <UnsplashReact
               applicationName="ArtisticMovements"
               className="upload-section__photo-search"
