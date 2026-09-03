@@ -41,7 +41,7 @@ class UploadSection extends Component {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-        timeout: 90000,
+        timeout: 0,
       })
       .then((response) => {
         const predictions = response.data.map(
@@ -60,13 +60,6 @@ class UploadSection extends Component {
   }
 
   render() {
-    const { backendStatus } = this.props;
-    const ready = backendStatus === "ready";
-    const waitMessage =
-      backendStatus === "error"
-        ? "Backend unavailable. Please refresh."
-        : "Waking backend — please wait…";
-
     return (
       <section className="upload-section" data-scroll-section>
         <div className="upload-section__content content-container">
@@ -88,25 +81,10 @@ class UploadSection extends Component {
               controlId="formFile"
               className="upload-section__input"
             >
-              <Form.Control
-                type="file"
-                onChange={this.handleUploadControl}
-                disabled={!ready}
-              />
+              <Form.Control type="file" onChange={this.handleUploadControl} />
             </Form.Group>
-            {!ready && (
-              <div className="upload-section__wait text-copy text-clr-primary">
-                {waitMessage}
-              </div>
-            )}
           </div>
-          <div
-            className="upload-section__unsplash"
-            style={{
-              opacity: ready ? 1 : 0.5,
-              pointerEvents: ready ? "auto" : "none",
-            }}
-          >
+          <div className="upload-section__unsplash">
             <UnsplashReact
               applicationName="ArtisticMovements"
               className="upload-section__photo-search"

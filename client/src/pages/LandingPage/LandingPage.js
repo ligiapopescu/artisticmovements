@@ -4,7 +4,7 @@ import TileScroll from "components/TileScrolls/TileScroll";
 import UploadSection from "components/UploadSection/UploadSection";
 import { LocomotiveScrollProvider } from "react-locomotive-scroll";
 
-export default function LandingPage({ backendStatus }) {
+export default function LandingPage() {
   const containerRef = useRef(null);
   return (
     <div>
@@ -21,7 +21,7 @@ export default function LandingPage({ backendStatus }) {
           >
             <TileScroll tileScrollType="rotated" />
           </Section>
-          <UploadSection backendStatus={backendStatus} />
+          <UploadSection />
         </main>
       </LocomotiveScrollProvider>
     </div>
